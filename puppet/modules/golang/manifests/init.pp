@@ -4,7 +4,7 @@ class golang () {
     $os_arch = "linux-amd64"
     $golang_tar_file = "go${version}.${os_arch}.tar.gz"
     $download_uri = "https://storage.googleapis.com/golang/${golang_tar_file}"
-    $download_location = "/vagrant/puppet/modules/golang/files/${golang_tar_file}"
+    $download_location = "/tmp/${golang_tar_file}"
 
     package { 'curl': }
 
@@ -13,8 +13,9 @@ class golang () {
         creates     => $download_location,
         require     => Package["curl"],
         loglevel    => info,
-        path        => "/usr/bin",
+        path        => "/usr/bin:/usr/local",
         timeout     => 120,
+        unless      => "which go && go version 2>/dev/null | grep ${version}",
     }
 
     exec { 'unzip golang archive':
