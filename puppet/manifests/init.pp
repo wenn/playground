@@ -3,3 +3,4 @@ Package {
 }
 
 include golang
+include git
