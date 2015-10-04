@@ -4,6 +4,7 @@ Package {
 
 include git
 include epel
+include golang
 
 service { 'iptables':
     enable => false,
