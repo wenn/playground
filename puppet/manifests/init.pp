@@ -2,5 +2,10 @@ Package {
     allow_virtual => true,
 }
 
-include golang
 include git
+include epel
+
+service { 'iptables':
+    enable => false,
+    ensure => 'stopped'
+}
